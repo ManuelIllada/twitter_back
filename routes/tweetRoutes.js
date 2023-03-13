@@ -5,5 +5,6 @@ const tweetController = require("../controllers/tweetController");
 router.get("/", tweetController.index);
 router.get("/:id", tweetController.show);
 router.post("/", tweetController.store);
+router.patch("/:id", tweetController.update);
 
 module.exports = router;

@@ -23,11 +23,19 @@ async function store(req, res) {
 
   await user.save();
   await tweet.save();
-  return res.json();
+  return res.json("The tweet has been created");
+}
+
+async function update(req, res) {
+  const tweet = await Tweet.findByIdAndUpdate(req.params.id, {
+    content: req.body.content,
+  });
+  res.json(tweet);
 }
 
 module.exports = {
   index,
   show,
   store,
+  update,
 };
