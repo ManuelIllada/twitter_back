@@ -14,12 +14,11 @@ async function show(req, res) {
 async function store(req, res) {
   const user = await User.findById("63fc0a422b6e9606a49c2f47");
   const tweet = new Tweet({
-    content: req.body.tweet,
-
+    content: req.body.content,
     like: [],
     userId: user,
   });
-  console.log(req.body.tweet);
+
   user.tweets.push(tweet);
 
   await user.save();
