@@ -1,4 +1,5 @@
 const Tweet = require("../models/Tweet");
+const User = require("../models/User");
 
 async function index(req, res) {
   const tweets = await Tweet.find();
@@ -10,7 +11,24 @@ async function show(req, res) {
   res.json(tweet);
 }
 
+async function store(req, res) {
+  const user = await User.findById("63fc0a422b6e9606a49c2f47");
+  const tweet = new Tweet({
+    content: req.body.tweet,
+
+    like: [],
+    userId: user,
+  });
+  console.log(req.body.tweet);
+  user.tweets.push(tweet);
+
+  await user.save();
+  await tweet.save();
+  return res.json();
+}
+
 module.exports = {
   index,
   show,
+  store,
 };
