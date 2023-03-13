@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("../partials/meta.ejs")%>
+    <title>Document</title>
+  </head>
+  <body style="background-color: #074874">
+    <div class="container text-center p-5">
+      <div class="row m-5 g-0 rounded" style="overflow: hidden">
+        <div
+          class="d-none d-md-block col-md-5 col-lg-7 position-relative"
+          style="background-color: #1da1f2"
+        >
+          <img
+            width="50"
+            height="50"
+            class="position-absolute start-0 m-4 p-2"
+            src="/img/login.svg"
+          />
+
+          <p
+            class="text-center position-absolute bottom-0 m-3 p-2"
+            style="color: white; font-size: 25px; font-family: Arial, Helvetica, sans-serif"
+          >
+            <strong>Hi! Welcome to Twitter Clone 👋</strong>
+          </p>
+        </div>
+        <div
+          class="col-sm-12 col-md-7 col-lg-5 pb-5 pt-5 text-center border"
+          style="background-color: white"
+        >
+          <h1>Sign up</h1>
+          Create and account and start using Twitter
+          <form method="POST" action="/signup" enctype="multipart/form-data">
+            <div class="m-3">
+              <input
+                name="firstname"
+                type="text"
+                class="form-control"
+                id="firstname"
+                placeholder="First name"
+              />
+            </div>
+            <div class="m-3">
+              <input
+                name="lastname"
+                type="text"
+                class="form-control"
+                id="lastname"
+                placeholder="Last name"
+              />
+            </div>
+            <div class="m-3">
+              <input name="email" type="text" class="form-control" id="email" placeholder="Email" />
+            </div>
+            <div class="m-3">
+              <input
+                name="username"
+                type="text"
+                class="form-control"
+                id="username"
+                placeholder="Username"
+              />
+            </div>
+            <div class="m-3">
+              <input class="form-control" name="image" type="file" id="formFile" />
+            </div>
+            <div class="m-3">
+              <input
+                name="password"
+                type="password"
+                class="form-control"
+                id="exampleInputPassword1"
+                placeholder="Password"
+              />
+            </div>
+            <div class="d-grid gap-2">
+              <button
+                type="submit"
+                class="btn btn-info m-3"
+                style="color: white; border-color: #1da1f2; background-color: #1da1f2"
+              >
+                Sign up
+              </button>
+            </div>
+          </form>
+          <span class="m-3">Already have an account? <a href="/login">Sign in</a></span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

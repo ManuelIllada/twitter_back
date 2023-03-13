@@ -1,0 +1,58 @@
+/* Colocar aquí CSS "propio". */
+#tablist-header a.active {
+  border-bottom: 4px solid #1da1f2;
+}
+
+/* Necessary CSS */
+.svglike {
+  cursor: pointer;
+  overflow: visible;
+  width: 20px;
+}
+.svglike #heart {
+  transform-origin: center;
+  animation: animateHeartOut 0.3s linear forwards;
+}
+
+.svglike #main-circ {
+  transform-origin: 29.5px 29.5px;
+}
+
+.svgdislike {
+  cursor: pointer;
+  overflow: visible;
+  width: 20px;
+  color: #e2264d;
+}
+.svgdislike #heart {
+  transform-origin: center;
+  animation: animateHeartOut 0.3s linear forwards;
+}
+
+.svgdislike #main-circ {
+  transform-origin: 29.5px 29.5px;
+}
+
+.trash {
+  display: inline-block;
+  text-align: right;
+}
+
+#profile-banner {
+  background-image: url("../img/banner.jpg");
+  background-repeat: repeat-x;
+  background-size: 230px;
+}
+#tweet-blue-border {
+  position: relative;
+  height: 14px;
+  width: 50px;
+  text-decoration: underline #1da1f2;
+  text-decoration-thickness: 3px;
+  font-weight: bold;
+}
+
+.follow {
+  display: flex;
+  justify-content: right;
+}

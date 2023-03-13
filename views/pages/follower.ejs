@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include("../partials/meta") %>
+    <title>Follows</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row ms-5">
+        <%- include("../partials/navbar.ejs")%>
+        <%- include("../partials/log-out-modal.ejs")%>
+        <div class="col-11 col-lg-7">
+          <div class="d-flex mb-4 mt-1">
+            <div class="pt-3 me-3">
+              <a style="text-decoration: none; color: black" href="/usuarios/perfil">🡨</a>
+            </div>
+            <div>
+              <h1 class="m-0"><%=user.firstname + " " + user.lastname%></h1>
+              <small class="opacity-75" style="color: #000000;
+              font-family: Arial, Helvetica, sans-serif;">@<%=user.username%></small>
+            </div>
+          </div>
+          <div class="" role="tablist">
+            <div class="text-center d-flex border-bottom" id="tablist-header">
+              <a
+                class="active list-group-item-action text-decoration-none"
+                id="list-home-list"
+                data-bs-toggle="list"
+                href="/usuarios/follower"
+                role="tab"
+                aria-controls="list-home"
+                ><h3>Followers</h3></a
+              >
+              <a
+                class="list-group-item-action text-decoration-none"
+                id="list-profile-list"
+                href="/usuarios/following"
+                aria-controls="list-profile"
+                ><h3>Following</h3></a
+              >
+            </div>
+            <div>
+              <div class="tab-content" id="nav-tabContent">
+                <div
+                  class="tab-pane fade show active"
+                  id="list-home"
+                  role="tabpanel"
+                  aria-labelledby="list-home-list"
+                >
+                  <% for (let follower of user.follower) {%>
+                  <div class="p-3 d-flex">
+                    <img
+                      class="me-3"
+                      src="/img/<%=follower.image%>"
+                      style="width: 50px; height: 50px; border-radius: 100%"
+                      alt=""
+                    />
+                    <div>
+                      <div class="m-0 fw-bold"><%=follower.firstname + " " + follower.lastname%></div>
+                      <small class="opacity-75" style="color: #000000;
+                      font-family: Arial, Helvetica, sans-serif; ">@<%=follower.username%></small>
+                    </div>
+                    <div class="ms-auto pt-3">
+                      <%const userFollowing = user.following.some((u) => u.id === follower.id);%>
+                      <!--prettier ignore-->
+                      <% if (!userFollowing) {%>
+                      <!--Hacer rutas de agregar nuevo following y dejar de seguir usuarios-->
+                      <a
+                        href="/usuarios/follows/add/<%=follower.id%>"
+                        class="btn rounded-pill"
+                        type="submit"
+                        style="color: white; background-color: #1da1f2"
+                        >Follow</a
+                      >
+                      <%}else{%>
+                      <a
+                        href="/usuarios/follows/delete/<%=follower.id%>"
+                        type="submit"
+                        class="btn btn-light rounded-pill"
+                        >Following</a
+                      >
+                      <%}%>
+                    </div>
+                  </div>
+                  <% } %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <%- include("../partials/cards") %>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
