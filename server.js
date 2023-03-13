@@ -3,9 +3,7 @@ const path = require("path");
 const methodOverride = require("method-override");
 const express = require("express");
 
-const sessions = require("./sessions");
 const routes = require("./routes");
-const passport = require("./passport");
 
 const APP_PORT = process.env.APP_PORT || 3000;
 const app = express();
@@ -16,8 +14,6 @@ app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.use(express.json());
 
-sessions(app);
-passport(app);
 routes(app);
 
 app.listen(APP_PORT, () => {
