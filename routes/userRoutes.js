@@ -1,9 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const userController = require("../controllers/userController");
-const ensureAuthenticated = require("../middlewares/ensureAuthenticated");
 
-router.use(ensureAuthenticated);
 router.post("/tweet", userController.post);
 router.get("/perfil", userController.show);
 router.get("/like/:id", userController.like);
