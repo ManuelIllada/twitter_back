@@ -151,6 +151,18 @@ async function disLike(req, res) {
   res.redirect("back");
 }
 
+async function tokens(req, res) {
+  const user = await User.findOne({ where: { email: req.body.email } });
+  if (user) {
+    const match = await user.isValidPassword(req.body.password);
+    if (match) {
+      const token = jwt.sign({ sub: user.id }, process.env.JWT_SECRET);
+      return res.json({ token: token });
+    }
+  }
+  res.send("hola");
+}
+
 module.exports = {
   show,
   follow,
@@ -163,4 +175,5 @@ module.exports = {
   disLike,
   addFollowing,
   removeFollowing,
+  tokens,
 };
