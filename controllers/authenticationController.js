@@ -1,7 +1,9 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const formidable = require("formidable");
+const bcrypt = require("bcryptjs");
 
-async function token(req, res) {
+async function getToken(req, res) {
   try {
     const user = await User.findOne({ email: req.body.email });
     console.log(user);
@@ -30,6 +32,32 @@ async function token(req, res) {
   }
 }
 
+async function store(req, res) {
+  const form = formidable({
+    multiples: true,
+    uploadDir: __dirname + "/../public/img",
+    keepExtensions: true,
+  });
+
+  form.parse(req, async function (fields) {
+    const passwordParaHashear = fields.password;
+    console.log("ok");
+    const passwordHasheado = await bcrypt.hash(passwordParaHashear, 10);
+    const { firstname, lastname, email, username } = fields;
+    const newUser = await User.create({
+      firstname,
+      lastname,
+      email,
+      username,
+      password: passwordHasheado,
+      image: "1.jpg",
+    });
+    console.log(newUser);
+    return res.json("json de nuevo user");
+  });
+}
+
 module.exports = {
-  token,
+  getToken,
+  store,
 };
