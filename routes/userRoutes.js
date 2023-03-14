@@ -1,14 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { expressjwt: checkJwt } = require("express-jwt");
-const cors = require("cors");
-
 const userController = require("../controllers/userController");
-router.post("/", userController.token);
+const cors = require("cors");
 
 //router.use(cors);
 
-router.post("/token", userController.token);
 router.get("/", userController.index);
 router.get("/:id", userController.show);
 router.post("/", userController.store);
