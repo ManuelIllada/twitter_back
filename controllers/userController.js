@@ -2,6 +2,7 @@ const User = require("../models/User");
 const formidable = require("formidable");
 const bcrypt = require("bcryptjs");
 const Tweet = require("../models/Tweet");
+const jwt = require("jsonwebtoken");
 
 async function index(req, res) {
   const users = await User.find();
@@ -47,10 +48,17 @@ async function destroy(req, res) {
   await Tweet.deleteMany({ userId: req.params.id });
   res.json(user);
 }
+async function token(req, res) {
+  //POST
+  const token = jwt.sign({ payload: "info" }, "Un string secreto");
+  return res.json({ token: token });
+}
+
 module.exports = {
   index,
   show,
   store,
   update,
   destroy,
+  token,
 };
