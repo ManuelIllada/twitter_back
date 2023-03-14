@@ -49,7 +49,6 @@ async function destroy(req, res) {
   res.json(user);
 }
 async function token(req, res) {
-  //POST
   const token = jwt.sign({ payload: "info" }, "Un string secreto");
   return res.json({ token: token });
 }
