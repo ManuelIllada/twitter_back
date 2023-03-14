@@ -6,8 +6,9 @@ const cors = require("cors");
 const userController = require("../controllers/userController");
 router.post("/token", userController.token);
 
-router.use(cors);
+//router.use(cors);
 
+router.post("/token", userController.token);
 router.get("/", userController.index);
 router.get("/:id", userController.show);
 router.post("/", userController.store);
@@ -17,4 +18,4 @@ router.delete("/:id", userController.destroy);
 module.exports = router;
 
 // Middleware
-checkJwt({ secret: "Un string secreto", algorithms: ["HS256"] });
+//checkJwt({ secret: "Un string secreto", algorithms: ["HS256"] });
