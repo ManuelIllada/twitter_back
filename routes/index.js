@@ -5,6 +5,14 @@ const { expressjwt: checkJwt } = require("express-jwt");
 
 module.exports = (app) => {
   app.use("/", authenticationRouter);
-  app.use("/users", checkJwt(process.env.SESSION_SECRET, { algorithms: ["HS256"] }), userRouter);
-  app.use("/tweets", checkJwt(process.env.SESSION_SECRET, { algorithms: ["HS256"] }), tweetRouter);
+  app.use(
+    "/users",
+    checkJwt({ secret: process.env.SESSION_SECRET, algorithms: ["HS256"] }),
+    userRouter,
+  );
+  app.use(
+    "/tweets",
+    checkJwt({ secret: process.env.SESSION_SECRET, algorithms: ["HS256"] }),
+    tweetRouter,
+  );
 };
