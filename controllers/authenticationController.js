@@ -18,6 +18,7 @@ async function token(req, res) {
         email: user.email,
         firstanme: user.firstname,
         lastname: user.lastname,
+        id: user._id,
       });
     } else {
       res.status(400).json({ error: "Usuario no válido" });
