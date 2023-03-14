@@ -39,7 +39,7 @@ async function store(req, res) {
     keepExtensions: true,
   });
 
-  form.parse(req, async function (fields) {
+  form.parse(req, async function (err, fields, files) {
     const passwordParaHashear = fields.password;
     console.log("ok");
     const passwordHasheado = await bcrypt.hash(passwordParaHashear, 10);
