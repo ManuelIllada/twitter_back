@@ -4,7 +4,7 @@ const { expressjwt: checkJwt } = require("express-jwt");
 const cors = require("cors");
 
 const userController = require("../controllers/userController");
-router.post("/", userController.token);
+router.post("/token", userController.token);
 
 router.use(cors);
 
