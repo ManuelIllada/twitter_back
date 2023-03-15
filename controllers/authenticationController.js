@@ -50,7 +50,7 @@ async function store(req, res) {
       email,
       username,
       password: passwordHasheado,
-      image: "1.jpg",
+      image: files.image !== undefined ? files.image.newFilename : "1.jpg",
     });
     console.log(newUser);
     return res.json("json de nuevo user");
