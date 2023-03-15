@@ -17,12 +17,10 @@ async function token(req, res) {
         token: token,
         username: user.username,
         email: user.email,
-        firstanme: user.firstname,
+        firstname: user.firstname,
         lastname: user.lastname,
         id: user._id,
-        tweets: user.tweets,
-        following: user.following,
-        follower: user.follower,
+        image: user.image,
       });
     } else {
       res.status(400).json({ error: "Usuario no válido" });
