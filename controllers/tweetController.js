@@ -2,7 +2,20 @@ const Tweet = require("../models/Tweet");
 const User = require("../models/User");
 
 async function index(req, res) {
-  const tweets = await Tweet.find();
+  const tweets = [];
+  const user = await User.findById(req.user.id).populate("following");
+
+  for (let index = 0; index < user.following.length; index++) {
+    const userfollow = await User.findById(user.following[index]).populate({
+      path: "tweets",
+      options: { sort: { createdAt: -1 } },
+    });
+    for (let tweet of userfollow.tweets) {
+      tweets.push(
+        await Tweet.findById(tweet).populate("content").populate("userId").populate("like"),
+      );
+    }
+  }
   res.json(tweets);
 }
 
