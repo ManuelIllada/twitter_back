@@ -6,7 +6,6 @@ const bcrypt = require("bcryptjs");
 async function token(req, res) {
   try {
     const user = await User.findOne({ email: req.body.email });
-    console.log(user);
     const password = req.body.password;
     const match = await user.comparePassword(password);
     if (match) {
@@ -21,6 +20,9 @@ async function token(req, res) {
         firstanme: user.firstname,
         lastname: user.lastname,
         id: user._id,
+        tweets: user.tweets,
+        following: user.following,
+        follower: user.follower,
       });
     } else {
       res.status(400).json({ error: "Usuario no válido" });
@@ -41,7 +43,6 @@ async function store(req, res) {
 
   form.parse(req, async function (err, fields, files) {
     const passwordParaHashear = fields.password;
-    console.log("ok");
     const passwordHasheado = await bcrypt.hash(passwordParaHashear, 10);
     const { firstname, lastname, email, username } = fields;
     const newUser = await User.create({
@@ -52,8 +53,7 @@ async function store(req, res) {
       password: passwordHasheado,
       image: files.image !== undefined ? files.image.newFilename : "1.jpg",
     });
-    console.log(newUser);
-    return res.json("json de nuevo user");
+    return res.json(newUser);
   });
 }
 
