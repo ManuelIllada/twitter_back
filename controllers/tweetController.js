@@ -19,7 +19,7 @@ async function index(req, res) {
 }
 
 async function show(req, res) {
-  const tweet = await Tweet.findById(req.params.id);
+  const tweet = await Tweet.find({ userId: req.auth.id });
   res.json(tweet);
 }
 
