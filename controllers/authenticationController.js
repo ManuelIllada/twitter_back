@@ -9,10 +9,7 @@ async function token(req, res) {
     const password = req.body.password;
     const match = await user.comparePassword(password);
     if (match) {
-      const token = jwt.sign(
-        { email: req.body.email, password: req.body.password },
-        process.env.SESSION_SECRET,
-      );
+      const token = jwt.sign({ id: user._id }, process.env.SESSION_SECRET);
       return res.json({
         token: token,
         username: user.username,

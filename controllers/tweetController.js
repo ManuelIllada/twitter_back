@@ -3,8 +3,7 @@ const User = require("../models/User");
 
 async function index(req, res) {
   const tweets = [];
-  const user = await User.findById(req.user.id).populate("following");
-
+  const user = await User.findById(req.auth.id).populate("following");
   for (let index = 0; index < user.following.length; index++) {
     const userfollow = await User.findById(user.following[index]).populate({
       path: "tweets",
