@@ -3,7 +3,7 @@ const User = require("../models/User");
 const formidable = require("formidable");
 const bcrypt = require("bcryptjs");
 
-async function getToken(req, res) {
+async function token(req, res) {
   try {
     const user = await User.findOne({ email: req.body.email });
     console.log(user);
@@ -58,6 +58,6 @@ async function store(req, res) {
 }
 
 module.exports = {
-  getToken,
+  token,
   store,
 };
