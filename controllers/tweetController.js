@@ -24,18 +24,17 @@ async function show(req, res) {
 }
 
 async function store(req, res) {
-  const user = await User.findById("63fc0a422b6e9606a49c2f47");
+  const user = await User.findById(req.auth.id);
   const tweet = new Tweet({
-    content: req.body.content,
+    content: req.body.tweet,
     like: [],
-    userId: user,
+    userId: user._id,
   });
-
   user.tweets.push(tweet);
 
   await user.save();
   await tweet.save();
-  return res.json("The tweet has been created");
+  return res.json(tweet);
 }
 
 async function update(req, res) {
