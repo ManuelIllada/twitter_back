@@ -35,7 +35,8 @@ async function show(req, res) {
 async function store(req, res) {
   const user = await User.findById(req.auth.id);
   const newTweet = new Tweet({
-    content: req.body.tweet,
+    content: req.body.content,
+    date: new Date(),
     like: [],
     userId: user._id,
   });
