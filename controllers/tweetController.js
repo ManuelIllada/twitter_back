@@ -29,6 +29,7 @@ async function show(req, res) {
     .populate("content")
     .populate("userId")
     .populate("like");
+  tweet.sort(tweet.date).reverse();
   res.json(tweet);
 }
 
