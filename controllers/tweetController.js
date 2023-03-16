@@ -34,16 +34,15 @@ async function show(req, res) {
 
 async function store(req, res) {
   const user = await User.findById(req.auth.id);
-  const tweet = new Tweet({
+  const newTweet = new Tweet({
     content: req.body.tweet,
     like: [],
     userId: user._id,
   });
-  user.tweets.push(tweet);
-
+  user.tweets.push(newTweet);
   await user.save();
-  await tweet.save();
-  return res.json(tweet);
+  await newTweet.save();
+  return res.json(newTweet);
 }
 
 async function update(req, res) {
