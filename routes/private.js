@@ -12,6 +12,9 @@ router.get("/users/", userController.index);
 router.get("/users/:id", userController.show);
 router.patch("/users/:id", userController.update);
 router.delete("/users/:id", userController.destroy);
+router.patch("/users/follow/:id", userController.addFollowing);
+router.delete("/users/follow/:id", userController.removeFollowing);
+
 //tweets
 router.get("/tweets", tweetController.index);
 router.get("/tweets/:username", tweetController.show);

@@ -26,9 +26,35 @@ async function destroy(req, res) {
   res.json(user);
 }
 
+async function addFollowing(req, res) {
+  const userId = req.auth.id;
+  const followingId = req.params.id;
+  await User.findByIdAndUpdate(userId, {
+    $push: { following: followingId },
+  });
+  await User.findByIdAndUpdate(followingId, {
+    $push: { follower: userId },
+  });
+  return res.json("Add new following");
+}
+
+async function removeFollowing(req, res) {
+  const userId = req.auth.id;
+  const followingId = req.params.id;
+  await User.findByIdAndUpdate(userId, {
+    $pull: { following: followingId },
+  });
+  await User.findByIdAndUpdate(followingId, {
+    $pull: { follower: userId },
+  });
+  return res.json("Remove following");
+}
+
 module.exports = {
   index,
   show,
   update,
   destroy,
+  addFollowing,
+  removeFollowing,
 };
