@@ -25,7 +25,11 @@ async function index(req, res) {
 }
 
 async function show(req, res) {
-  const tweet = await Tweet.find({ userId: req.auth.id });
+  const tweet = await Tweet.find({ userId: req.auth.id })
+    .populate("content")
+    .populate("userId")
+    .populate("like");
+  console.log(tweet);
   res.json(tweet);
 }
 

@@ -13,7 +13,7 @@ router.get("/users/:id", userController.show);
 router.patch("/users/:id", userController.update);
 router.delete("/users/:id", userController.destroy);
 //tweets
-router.get("/tweets/:id", tweetController.index);
+router.get("/tweets", tweetController.index);
 router.get("/tweets/:username", tweetController.show);
 router.post("/tweets/", tweetController.store);
 router.patch("/tweets/:id", tweetController.update);
