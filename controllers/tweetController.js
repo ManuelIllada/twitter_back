@@ -29,7 +29,6 @@ async function show(req, res) {
     .populate("content")
     .populate("userId")
     .populate("like");
-  console.log(tweet);
   res.json(tweet);
 }
 
