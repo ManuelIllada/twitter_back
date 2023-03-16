@@ -15,6 +15,12 @@ async function index(req, res) {
       );
     }
   }
+  for (let tweet of user.tweets) {
+    tweets.push(
+      await Tweet.findById(tweet).populate("content").populate("userId").populate("like"),
+    );
+  }
+  tweets.sort(tweets.date).reverse();
   res.json(tweets);
 }
 
