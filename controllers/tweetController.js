@@ -53,7 +53,7 @@ async function update(req, res) {
   res.json(tweet);
 }
 async function destroy(req, res) {
-  const user = await User.findById("63fc0a422b6e9606a49c2f47");
+  const user = await User.findById(req.auth.id);
   const tweet = req.params.id;
   await Tweet.findByIdAndDelete(tweet);
   await User.findByIdAndUpdate(user, {
