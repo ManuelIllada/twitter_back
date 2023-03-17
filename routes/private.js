@@ -21,5 +21,7 @@ router.get("/tweets/:username", tweetController.show);
 router.post("/tweets/", tweetController.store);
 router.patch("/tweets/:id", tweetController.update);
 router.delete("/tweets/:id", tweetController.destroy);
+router.patch("/tweets/like/:id", tweetController.like);
+router.delete("/tweets/dislike/:id", tweetController.dislike);
 
 module.exports = router;
