@@ -2,6 +2,7 @@ const User = require("../models/User");
 const formidable = require("formidable");
 const bcrypt = require("bcryptjs");
 const Tweet = require("../models/Tweet");
+const { faker } = require("@faker-js/faker");
 
 async function index(req, res) {
   const users = await User.find();
@@ -13,6 +14,31 @@ async function show(req, res) {
     .populate("following")
     .populate("follower");
   res.json(user);
+}
+
+async function random(req, res) {
+  const user = await User.findById(req.auth.id)
+    .populate({
+      path: "tweets",
+      options: { sort: { createdAt: -1 } },
+    })
+    .populate("following")
+    .populate("follower");
+  const usersRandom = [];
+  const usersTotal = await User.find();
+  const users = await User.find({ _id: { $nin: user.following } });
+  for (let index = 0; index < 5; index++) {
+    const randomNumber = faker.datatype.number({ min: 0, max: users.length - 1 });
+    const isInRandom = usersRandom.some((u) => u.id === users[randomNumber].id);
+    const isMe = users[randomNumber].id === user.id;
+    if (!isInRandom && !isMe) {
+      usersRandom.push(users[randomNumber]);
+    } else if (user.following.length + 1 + usersRandom.length === usersTotal.length) {
+    } else {
+      index = index - 1;
+    }
+  }
+  res.json(usersRandom);
 }
 
 async function update(req, res) {
@@ -56,6 +82,7 @@ async function removeFollowing(req, res) {
 module.exports = {
   index,
   show,
+  random,
   update,
   destroy,
   addFollowing,
