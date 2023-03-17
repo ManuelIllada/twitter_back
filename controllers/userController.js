@@ -8,7 +8,10 @@ async function index(req, res) {
   res.json(users);
 }
 async function show(req, res) {
-  const user = await User.find({ username: req.params.username }).populate("tweets");
+  const user = await User.find({ username: req.params.username })
+    .populate("tweets")
+    .populate("following")
+    .populate("follower");
   res.json(user);
 }
 
