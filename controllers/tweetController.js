@@ -10,15 +10,11 @@ async function index(req, res) {
       options: { sort: { createdAt: -1 } },
     });
     for (let tweet of userfollow.tweets) {
-      tweets.push(
-        await Tweet.findById(tweet).populate("content").populate("userId").populate("like"),
-      );
+      tweets.push(await Tweet.findById(tweet).populate("content").populate("userId"));
     }
   }
   for (let tweet of user.tweets) {
-    tweets.push(
-      await Tweet.findById(tweet).populate("content").populate("userId").populate("like"),
-    );
+    tweets.push(await Tweet.findById(tweet).populate("content").populate("userId"));
   }
   tweets.sort(tweets.date).reverse();
   res.json(tweets);
