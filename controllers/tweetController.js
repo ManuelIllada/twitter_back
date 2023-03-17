@@ -59,10 +59,29 @@ async function destroy(req, res) {
   res.json(user);
 }
 
+async function like(req, res) {
+  const user = req.auth.id;
+  const tweetId = req.params.id;
+  await Tweet.findByIdAndUpdate(tweetId, {
+    $push: { like: user },
+  });
+  return res.json("Add new like");
+}
+async function dislike(req, res) {
+  const user = req.auth.id;
+  const tweetId = req.params.id;
+  await Tweet.findByIdAndUpdate(tweetId, {
+    $pull: { like: user },
+  });
+  return res.json("Remove like");
+}
+
 module.exports = {
   index,
   show,
   store,
   update,
   destroy,
+  like,
+  dislike,
 };
