@@ -9,7 +9,7 @@ router.use(checkJwt({ secret: process.env.SESSION_SECRET, algorithms: ["HS256"] 
 //router.use(cors);
 //users
 router.get("/users/", userController.index);
-router.get("/users/:id", userController.show);
+router.get("/users/:username", userController.show);
 router.patch("/users/:id", userController.update);
 router.delete("/users/:id", userController.destroy);
 router.patch("/users/follow/:id", userController.addFollowing);

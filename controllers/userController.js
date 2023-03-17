@@ -8,7 +8,7 @@ async function index(req, res) {
   res.json(users);
 }
 async function show(req, res) {
-  const user = await User.findById(req.auth.id).populate("following").populate("follower");
+  const user = await User.find({ username: req.params.username }).populate("tweets");
   res.json(user);
 }
 
