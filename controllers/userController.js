@@ -12,7 +12,8 @@ async function show(req, res) {
   const user = await User.find({ username: req.params.username })
     .populate("tweets")
     .populate("following")
-    .populate("follower");
+    .populate("follower")
+    .populate("image");
   res.json(user);
 }
 

@@ -46,7 +46,7 @@ async function store(req, res) {
       email,
       username,
       password: passwordHasheado,
-      image: files.image,
+      image: files.image.newFilename,
     });
     return res.json(newUser);
   });
