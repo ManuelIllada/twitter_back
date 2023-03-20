@@ -27,9 +27,7 @@ module.exports = async () => {
     const user = new User({
       firstname: faker.name.firstName(),
       lastname: faker.name.lastName(),
-      firstname: faker.name.firstName(),
-      lastname: faker.name.lastName(),
-      image: faker.helpers.arrayElement(["1.jpg", "2.jpg", "3.jpg", "4.jpg"]),
+      image: faker.image.avatar(),
       username: faker.internet.userName(),
       email: faker.internet.email(),
       password: await bcrypt.hash("1234", 8),
