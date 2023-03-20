@@ -38,6 +38,13 @@ userSchema.methods.comparePassword = async function (userPassword) {
   return match;
 };
 
+userSchema.methods.toJSON = function () {
+  const user = this.toObject();
+  user.id = user._id.toString();
+  delete user.password;
+  return user;
+};
+
 const User = mongoose.model("User", userSchema);
 
 module.exports = User;
