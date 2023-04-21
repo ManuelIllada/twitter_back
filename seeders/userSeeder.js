@@ -20,7 +20,16 @@ const _ = require("lodash");
 faker.locale = "es";
 
 module.exports = async () => {
-  const users = [];
+  const users = [
+    new User({
+      firstname: "user",
+      lastname: "user",
+      image: faker.image.avatar(),
+      username: "user",
+      email: "user@hotmail.com",
+      password: await bcrypt.hash("1234", 8),
+    }),
+  ];
   const totalUsers = 20;
 
   for (let i = 0; i < totalUsers; i++) {
