@@ -14,6 +14,9 @@ const tweetSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
+    retweets: Number,
+    views: Number,
+    comments: Number,
   },
   { timestamps: true },
 );

@@ -33,6 +33,9 @@ async function store(req, res) {
     date: new Date(),
     like: [],
     userId: user._id,
+    retweets: 0,
+    views: 0,
+    comments: 0,
   });
   user.tweets.push(newTweet);
   await user.save();

@@ -12,6 +12,9 @@ module.exports = async () => {
       content: faker.lorem.paragraph(1),
       date: faker.date.soon(),
       like: [],
+      comments: faker.datatype.number({ min: 0, max: 2000 }),
+      retweets: faker.datatype.number({ min: 0, max: 10000 }),
+      views: faker.datatype.number({ min: 0.1, max: 100.9 }),
     });
 
     tweets.push(tweet);
