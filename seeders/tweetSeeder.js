@@ -20,11 +20,21 @@ module.exports = async () => {
     tweets.push(tweet);
   }
 
+  const users = await User.find();
+
   for (const tweet of tweets) {
     const randomNumber = faker.datatype.number({ min: 0, max: 19 });
     const randomUser = await User.findOne().skip(randomNumber);
     tweet.userId = randomUser;
     randomUser.tweets.push(tweet);
+
+    for (
+      let index = faker.datatype.number({ min: 0, max: 20 });
+      index > tweet.like.length;
+      index--
+    ) {
+      tweet.like.push(users[faker.datatype.number({ min: 0, max: 19 })]._id);
+    }
 
     await randomUser.save();
   }
