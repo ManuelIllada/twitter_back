@@ -40,15 +40,22 @@ async function store(req, res) {
     const passwordParaHashear = fields.password;
     const passwordHasheado = await bcrypt.hash(passwordParaHashear, 10);
     const { firstname, lastname, email, username } = fields;
-    const newUser = await User.create({
-      firstname,
-      lastname,
-      email,
-      username,
-      password: passwordHasheado,
-      image: files.image.newFilename,
-    });
-    return res.json(newUser);
+    if (
+      (await User.find({ username: username })) !== null &&
+      (await User.find({ email: email })) !== null
+    ) {
+      const newUser = await User.create({
+        firstname,
+        lastname,
+        email,
+        username,
+        password: passwordHasheado,
+        image: files.image.newFilename,
+      });
+      return res.json(newUser);
+    } else {
+      return "error";
+    }
   });
 }
 
