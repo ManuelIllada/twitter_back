@@ -32,7 +32,7 @@ async function token(req, res) {
 async function store(req, res) {
   const form = formidable({
     multiples: true,
-    uploadDir: process.env.DB_CONNECTION_STRING + "/../public/img",
+    uploadDir: __dirname + "/../public/img",
     keepExtensions: true,
   });
 
