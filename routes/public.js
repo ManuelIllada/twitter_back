@@ -4,6 +4,6 @@ const router = express.Router();
 const authenticationController = require("../controllers/authenticationController");
 
 router.post("/tokens", authenticationController.token);
-router.post("/users", authenticationController.store);
+router.post("/user", authenticationController.store);
 
 module.exports = router;
