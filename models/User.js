@@ -13,6 +13,11 @@ const userSchema = new Schema({
   email: String,
   username: String,
   password: String,
+  bio: String,
+  location: String,
+  website: String,
+  front: String,
+  birthday: Date,
   tweets: [
     {
       type: Schema.Types.ObjectId,

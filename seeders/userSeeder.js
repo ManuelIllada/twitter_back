@@ -28,6 +28,11 @@ module.exports = async () => {
       username: "user",
       email: "user@hotmail.com",
       password: await bcrypt.hash("1234", 8),
+      bio: "",
+      location: "",
+      website: "",
+      front: "",
+      birthday: "",
     }),
   ];
   const totalUsers = 20;
