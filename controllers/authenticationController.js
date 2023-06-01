@@ -2,6 +2,12 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const formidable = require("formidable");
 const bcrypt = require("bcryptjs");
+const path = require("path");
+const fs = require("fs");
+
+const { createClient } = require("@supabase/supabase-js");
+
+const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
 
 async function token(req, res) {
   try {
@@ -32,11 +38,23 @@ async function token(req, res) {
 async function store(req, res) {
   const form = formidable({
     multiples: true,
-    uploadDir: __dirname + "/../public/img",
     keepExtensions: true,
   });
 
   form.parse(req, async function (err, fields, files) {
+    const ext = path.extname(files.image.filepath);
+    console.log(ext);
+
+    const newFileName = `image_${Date.now()}${ext}`;
+    const { data, error } = await supabase.storage
+      .from("img")
+      .upload(newFileName, fs.createReadStream(files.image.filepath), {
+        cacheControl: "3600",
+        upsert: false,
+        contentType: files.image.mimetype,
+        duplex: "half",
+      });
+
     const passwordParaHashear = fields.password;
     const passwordHasheado = await bcrypt.hash(passwordParaHashear, 10);
     const { firstname, lastname, email, username } = fields;
@@ -50,7 +68,7 @@ async function store(req, res) {
         email,
         username,
         password: passwordHasheado,
-        image: files.image.newFilename,
+        image: data.path,
       });
       return res.json(newUser);
     } else {
